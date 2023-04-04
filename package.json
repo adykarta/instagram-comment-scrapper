@@ -1,0 +1,17 @@
+{
+  "name": "instagram-comment-scrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "json2xls": "^0.1.2",
+    "puppeteer": "^19.6.2"
+  }
+}
