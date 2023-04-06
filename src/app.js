@@ -26,6 +26,7 @@ app.use(morgan('combined'));
 
 
 // defining an endpoint to return all ads
+app.use('/', "Hello World");
 app.use('/api/v1/instagram', instagramRoutes);
 
 // handle undefined Routes
