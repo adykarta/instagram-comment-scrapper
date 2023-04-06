@@ -1,15 +1,10 @@
 var puppeteer = require("puppeteer");
-var json2xls = require('json2xls');
-var fs = require('fs');
 
 const apiPrefix = 'https://www.instagram.com/api/v1/media/3037894166243907830/comments/?can_support_threading=true';
-const username = 'dummyusername'; // TODO
-const password = 'dummypassword'; // TODO
-const postUrl = 'https://www.instagram.com/p/postid/'; // TODO
 
 
 
-const login = async(page)=>{
+const login = async(page, username, password)=>{
     await page.goto("https://www.instagram.com/accounts/login/",{
       waitUntil:"domcontentloaded",
       timeout:0
@@ -42,12 +37,12 @@ const debuggerConsole = (page)=>{
   });
 }   
 
-const loadAllComments = async(page)=>{
+const loadAllComments = async(page, post)=>{
   let responses = [];
 
   const [res] = await Promise.all([
     page.waitForResponse(res => res.url().includes(apiPrefix), {timeout: 90000}),
-   page.goto(postUrl, {
+   page.goto(post, {
         timeout: 0,
         waitUntil:"domcontentloaded"
     })
@@ -126,12 +121,7 @@ const processData = (comments)=>{
 
 }
 
-const generateExcel = (json)=>{
-    var xls = json2xls(json);
-    fs.writeFileSync('data.xlsx', xls, 'binary');
-}
-
-const main = async () => {
+exports.main = async (username, password, post) => {
   // Start a Puppeteer session with:
   // - a visible browser (`headless: false` - easier to debug because you'll see the browser in action)
   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
@@ -148,26 +138,20 @@ const main = async () => {
   debuggerConsole(page);
 
   // Go to login page
-  await login(page);  
+  await login(page, username, password);  
   
 
   // Go to spesific post and load comments
-  const comments = await loadAllComments(page);
+  const comments = await loadAllComments(page, post);
 
 
   // Data processing
   const processedData = processData(comments);
 
 
-
-  // Generate excel
-  generateExcel(processedData);
-
-
   await browser.close();
+
+  return processedData || [];
 
  
 }
-
-// Start the scraping
-main();
