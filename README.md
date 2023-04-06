@@ -13,6 +13,6 @@ npm install
 ## Usage
 
 ```bash
-npm start
+npm api
 ```
 
