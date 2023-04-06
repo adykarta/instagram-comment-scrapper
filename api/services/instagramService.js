@@ -1,8 +1,9 @@
-var puppeteer = require("puppeteer");
-
+var puppeteer = require("puppeteer-core");
+var chromium = require("chrome-aws-lambda");
 const apiPrefix = 'https://www.instagram.com/api/v1/media/3037894166243907830/comments/?can_support_threading=true';
 
 
+const LOCAL_CHROME_EXECUTABLE = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 
 const login = async(page, username, password)=>{
     await page.goto("https://www.instagram.com/accounts/login/",{
@@ -122,10 +123,13 @@ const processData = (comments)=>{
 }
 
 exports.main = async (username, password, post) => {
+    const executablePath = await chromium.executablePath || LOCAL_CHROME_EXECUTABLE;
   // Start a Puppeteer session with:
   // - a visible browser (`headless: false` - easier to debug because you'll see the browser in action)
   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
   const browser = await puppeteer.launch({
+    executablePath,
+    args: chromium.args,
     headless: false,
     defaultViewport: null,
   });
