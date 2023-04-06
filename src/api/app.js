@@ -4,9 +4,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
-const instagramRoutes = require('./routes/instagramRoutes');
-const globalErrHandler = require('./controllers/errorController');
-const AppError = require('./utils/appError');
+const instagramRoutes = require('../routes/instagramRoutes');
+const globalErrHandler = require('../controllers/errorController');
+const AppError = require('../utils/appError');
 
 // defining the Express app
 const app = express();

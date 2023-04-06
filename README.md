@@ -13,6 +13,6 @@ npm install
 ## Usage
 Dont forget to change username, password, and postUrl before running
 ```bash
-node src/server.js
+node src/api
 ```
 
