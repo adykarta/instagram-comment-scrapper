@@ -11,8 +11,8 @@ npm install
 ```
 
 ## Usage
-Dont forget to change username, password, and postUrl before running
+
 ```bash
-node src/api
+npm start
 ```
 
