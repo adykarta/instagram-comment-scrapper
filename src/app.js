@@ -25,8 +25,13 @@ app.use(cors());
 app.use(morgan('combined'));
 
 
+
+// Root route of express app
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
 // defining an endpoint to return all ads
-app.use('/', "Hello World");
 app.use('/api/v1/instagram', instagramRoutes);
 
 // handle undefined Routes
