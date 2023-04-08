@@ -1,6 +1,6 @@
 var puppeteer = require("puppeteer-core");
 var chromium = require("chrome-aws-lambda");
-const apiPrefix = 'https://www.instagram.com/api/v1/media/3037894166243907830/comments/?can_support_threading=true';
+const apiPrefix = 'https://www.instagram.com/api/v1/media';
 
 
 const LOCAL_CHROME_EXECUTABLE = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
